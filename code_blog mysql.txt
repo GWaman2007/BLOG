@@ -1,0 +1,55 @@
+CREATE DATABASE IF NOT EXISTS code_blog
+USE code_blog
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE blogs (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    username VARCHAR(255) NOT NULL,
+    like_count INT DEFAULT 0,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE blog_likes (
+    id INT NOT NULL AUTO_INCREMENT,
+    blog_id INT,
+    user_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (blog_id) REFERENCES blogs(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+INSERT INTO users (id, username, password) VALUES
+(1, 'AMAN', '@M@N2007'),
+(2, 'Kavyan.', 'Kavyan.'),
+(3, 'TEST', 'test'),
+(4, 'STARLIGHT  CUPCAKE 🌟🧁', '305'),
+(5, 'Sanjeev', 'Sanjeev@1975'),
+(6, 'AMAN123', 'EGSHRYHREU'),
+(7, 'admin', 'admin'),
+(8, 'admin1', 'admin1'),
+(9, 'admin2', 'admin2'),
+(10, 'test2', 'test2'),
+(11, 'test3', 'test3'),
+(12, 'test4', 'test4');
+INSERT INTO blogs (id, title, content, created_at, username, like_count) VALUES
+(25, 'I am Kavyan', 'I am beta tester. I do skating as a sport. I''m not good at it tho 🥲🥲🥲🥲🥲', '2024-04-16 22:23:18', 'Kavyan.', 0),
+(26, 'Announcement:', 'Kavyan is the first beta tester. Thank you for your support', '2024-04-16 22:27:40', 'AMAN', 0),
+(27, 'Clash Royale Mastery: Unleash Your Strategic Prowess', 'Introduction: Welcome to Clash Royale Mastery, where we delve deep into the world of strategic gameplay...', '2024-04-16 22:29:45', 'Kavyan.', 0),
+(28, 'Kavyan''s Account Hacked', 'Help Help Call Ambulance', '2024-04-16 22:36:36', 'Kavyan.', 0),
+(32, 'Exploring the Evolution of MechArena: Where Science Fiction Meets Reality', 'Introduction: MechArena, the epitome of human ingenuity and technological advancement, stands as...', '2024-04-16 22:51:38', 'Kavyan.', 0),
+(33, 'MEANING  OF  BHAVYA', '"Bhavya" is a Sanskrit word that means "grand," "splendid," or "glorious."', '2024-04-16 23:16:49', 'STARLIGHT  CUPCAKE 🌟🧁', 0),
+(35, 'Sanjeev', 'My favourite fruit is banana', '2024-04-16 23:25:21', 'Sanjeev', 0),
+(36, 'Hellooooooooo !!!!!!!!!', 'THE SITE PUBLIC AND A STATIC DOMAIN NAME', '2024-06-29 13:24:44', 'AMAN', 1),
+(38, 'hi', 'hello hello', '2024-07-31 20:59:26', 'AMAN', 0),
+(39, 'hi', 'hi hi', '2024-07-31 21:09:12', 'AMAN', 0),
+(40, 'hi i am admin', 'hi i am admin your messages are moderated', '2024-08-21 20:16:28', 'admin', 0);
+INSERT INTO blog_likes (id, blog_id, user_id) VALUES
+(3, 36, 1),
+(4, 36, 7);
